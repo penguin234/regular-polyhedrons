@@ -1,0 +1,23 @@
+<html>
+
+  <head>
+    <title>
+      정다면체 검증기
+    </title>
+
+    <script src="./rule.js"></script>
+  </head>
+
+  <body>
+    <h1> 정다면체 확인 </h1>
+
+    <script>
+      const cube = new Rule(8, 6, Math.PI / 2);
+      const res1 = cube.ValidatePointCount({ points: [[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0], [0, 0, 1], [0, 1, 1], [1, 1, 1], [1, 0, 1]], surfaces: [[0, 1, 2, 3], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7], [4, 5, 6, 7]] });
+      const res2 = cube.ValidatePointCount({ points: [[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0], [0, 0, 1], [0, 1, 1], [1, 1, 1], [1, 0, 1], [2, 2, 2]], surfaces: [[0, 1, 2, 3], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7], [4, 5, 6, 7]] });
+      console.log(res1);
+      console.log(res2);
+    </script>
+  </body>
+
+</html>
