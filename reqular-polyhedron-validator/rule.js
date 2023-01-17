@@ -40,4 +40,38 @@ Rule.prototype.CheckSideLength = function(surface) {
   let v = Vector.FromPoints(surface[c - 1], surface[0])
   const l = Math.sqrt(Vector.InnerProduct(v, v));
   for (let i = 1; i < c; i++) {
-    v = Vector.FromPoints(surface[i - 1], surface[i])
+    v = Vector.FromPoints(surface[i - 1], surface[i]);
+    if (Math.sqrt(Vector.InnerProduct(v, v)) != l) {
+      return {
+         Err: { message: 'side length of a surface is differnet' }
+      };
+    }
+  }
+  return {
+    OK: l
+  };
+};
+
+Rule.GetSurfacePoints = function(polyhedron, index) {
+  return polyhedron.surfaces[index].map(p => polyhedron.points[p]);
+};
+
+Rule.prototype.ValidateSideLengths = function(polyhedron) {
+  let res = this.CheckSideLength(Rule.GetSurfacePoints(polyhedron, 0));
+  if (res.Err) {
+    return res;
+  }
+  let l = res.OK;
+  for (let i = 1; i < this.surfaceCount; i++) {
+    res = this.CheckSideLength(Rule.GetSurfacePoints(polyhedron, i));
+    if (res.Err) {
+      return res;
+    }
+    if (res.OK != l) {
+      return {
+        Err: { message: 'side length between surfaces are different' }
+      };
+    }
+  }
+  return res;
+}
