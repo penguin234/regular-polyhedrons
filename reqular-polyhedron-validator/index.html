@@ -18,13 +18,18 @@
         surfaces: [[0, 1, 2, 3], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7], [4, 5, 6, 7]]
       };
 
-      const checkCube = new Rule(8, 6, Math.PI / 2);
+      const checkCube = new Rule(8, 6, 4, Math.PI / 2);
       const res1 = checkCube.ValidatePointCount(cubeMesh);
       const res2 = checkCube.ValidateSurfaceCount(cubeMesh);
-      const res3 = checkCube.ValidateSideLengths(cubeMesh);
+      const res3 = checkCube.ValidateSurfacePointCount(cubeMesh);
+      const res4 = checkCube.ValidateSideLengths(cubeMesh);
+      const res5 = checkCube.ValidateSurfaceAngles(cubeMesh);
+
       console.log(res1);
       console.log(res2);
       console.log(res3);
+      console.log(res4);
+      console.log(res5);
     </script>
   </body>
 
