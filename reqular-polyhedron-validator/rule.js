@@ -135,3 +135,23 @@ Rule.prototype.ValidateSurfaceAngles = function(polyhedron) {
   }
   return res;
 };
+
+
+Rule.prototype.CheckSurfaceDifferent(polyhedron, s1, s2) {
+  
+};
+
+Rule.prototype.ValidateSurfaceQnique = function(polyhedron) {
+  const s = this.surfaceCount;
+  for (let i = 0; i < s; i++) {
+    for (let j = i + 1; j < s; j++) {
+      let res = this.CheckSurfaceDifferent(polyhedron, i, j);
+      if (res.Err) {
+        return res;
+      }
+    }
+  }
+  return {
+    OK: true
+  };
+};
