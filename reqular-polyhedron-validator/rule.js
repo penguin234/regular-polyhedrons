@@ -137,11 +137,35 @@ Rule.prototype.ValidateSurfaceAngles = function(polyhedron) {
 };
 
 
-Rule.prototype.CheckSurfaceDifferent(polyhedron, s1, s2) {
+Rule.prototype.CheckSurfaceDifferent = function(polyhedron, s1index, s2index) {
+  const s1 = polyhedron.surfaces[s1index];
+  const s2 = polyhedron.surfaces[s2index];
+
+  const c = this.surfacePointCount;
+  let pivot = 0;
+  while (s1[pivot] != s2[0]) {
+    pivot++;
+    if (pivot == c) {
+      return {
+        OK: true
+      };
+    }
+  }
   
+  for (let i = 1; i < c; i++) {
+    if (s1[(pivot + i) % c] != s2[i]) {
+      return {
+        OK: true
+      };
+    }
+  }
+
+  return {
+    Err: { message: 'those surfaces are same: ' + String(s1) + ' and ' + String(s2) }
+  };
 };
 
-Rule.prototype.ValidateSurfaceQnique = function(polyhedron) {
+Rule.prototype.ValidateSurfacesUnique = function(polyhedron) {
   const s = this.surfaceCount;
   for (let i = 0; i < s; i++) {
     for (let j = i + 1; j < s; j++) {
