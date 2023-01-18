@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <h1> 정육면체 확인 </h1>
+    <h1> 정팔면체 확인 </h1>
 
     <div>
       <h2> 확인할 다면체 데이터 </h2>
@@ -25,17 +25,17 @@
     </div>
 
     <script>
-      const validateHexahedron = new Rule(8, 6, 4, Math.PI / 2);
+      const validateOctahedron = new Rule(6, 8, 3, Math.PI / 3);
     </script>
 
     <script>
-      let hexahedronMesh = null;
-      fetch("https://regular-polyhedrons.netlify.app/hexahedron.json", {
+      let octahedronMesh = null;
+      fetch("https://regular-polyhedrons.netlify.app/octahedron.json", {
             mode: 'cors'
         })
         .then(res => res.json())
         .then((res) => {
-          ValidatePolyhedron(res, validateHexahedron);
+          ValidatePolyhedron(res, validateOctahedron);
         });
     </script>
 
