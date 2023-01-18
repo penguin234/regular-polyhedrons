@@ -10,9 +10,21 @@
   </head>
 
   <body>
-    <h1> 정다면체 확인 </h1>
+    <h1> 정육면체 확인 </h1>
 
-    <a href="./hexahedron.html"> 정육면체 </a>
+    <div>
+      <h2> 확인할 다면체 데이터 </h2>
+    </div>
+
+    <div>
+      <h2> 확인 결과 </h2>
+    </div>
+
+    <script>
+      fetch("./hexahedron.json")
+        .then(res => res.json())
+        .then(res => console.log(res))
+    </script>
 
     <script>
       const cubeMesh = {
