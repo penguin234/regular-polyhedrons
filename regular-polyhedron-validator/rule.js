@@ -103,7 +103,10 @@ Rule.prototype.CheckAngle = function(p1, p2, p3) {
     return { OK: true };
   }
   return {
-    Err: { message: 'angle should be ' + String(this.surfaceAngle) + ' but it is ' + String(angle) }
+    Err: {
+      message: 'angle should be ' + String(this.surfaceAngle) + ' but it is ' + String(angle),
+      difference: Math.abs(this.surfaceAngle - angle)
+    }
   };
 };
 
