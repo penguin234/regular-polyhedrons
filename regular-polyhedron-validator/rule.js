@@ -6,6 +6,20 @@ function Rule(pointCount, surfaceCount, surfacePointCount, surfaceAngle) {
 }
 
 
+Rule.ABSOLUTE_TOLERANCE = 0.00000001;
+Rule.RELATIVE_TOLERANCE = 0.00000001;
+
+Rule.IsScalarEqual = function(a, b) {
+  if (Math.abs(a - b) > Rule.ABSOLUTE_TOLERANCE) {
+    return false;
+  }
+  if (Math.abs(a + b) > 0 && (Math.abs(a - b) / Math.abs(a + b) > Rule.RELATIVE_TOLERANCE)) {
+    return false;
+  }
+  return true;
+}
+
+
 Rule.prototype.ValidatePointCount = function(polyhedron) {
   const pointCount = polyhedron.points.length;
   if (this.pointCount == pointCount) {
@@ -61,7 +75,7 @@ Rule.prototype.CheckSideLength = function(surface) {
   const l = Vector.Size(v);
   for (let i = 1; i < c; i++) {
     v = Vector.FromPoints(surface[i - 1], surface[i]);
-    if (Vector.Size(v) != l) {
+    if (!Rule.IsScalarEqual(Vector.Size(v), l)) {
       return {
          Err: { message: 'side length of a surface is differnet' }
       };
@@ -99,7 +113,7 @@ Rule.prototype.CheckAngle = function(p1, p2, p3) {
   const prod = Vector.InnerProduct(v1, v2);
   const cosA = prod / (Vector.Size(v1) * Vector.Size(v2));
   const angle = Math.acos(cosA);
-  if (this.surfaceAngle == angle) {
+  if (Rule.IsScalarEqual(this.surfaceAngle, angle)) {
     return { OK: true };
   }
   return {
