@@ -16,5 +16,13 @@
     [5, 2, 3],
     [5, 3, 4],
     [5, 4, 1]
-  ]
+  ],
+  "information": {
+    "pointCount": 6,
+    "surface": {
+      "count": 8,
+      "pointCount": 3,
+      "angleDegree": 60
+    }
+  }
 }
